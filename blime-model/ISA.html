@@ -164,13 +164,7 @@ the prover can work it out, but needs a hint.</p>
 </code></pre>
 <section id="utility-functions">
 <h3>Utility functions<a class="headerlink" href="#utility-functions" title="Permalink to this heading">¶</a></h3>
-<pre class="code fstar literal-block"><code>// let rec any_value_is_blinded (values: list blindedWord): bool =
-//   match values with
-//    | Nil              -&gt; false
-//    | Blinded(hd) :: _  -&gt; true
-//    | Clear(hd)   :: tl -&gt; any_value_is_blinded tl
-
-type blindedness_state =
+<pre class="code fstar literal-block"><code>type blindedness_state =
   | NoneBlinded : blindedness_state
   | ConsistentlyBlinded : blindedness_domain -&gt; blindedness_state
   | InconsistentlyBlinded : blindedness_state
