@@ -1,135 +1,45 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3c.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
+    <title>Load-store model &#8212; blime-model  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.36.0/codemirror.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/cm.tango.css" />
+    <link rel="stylesheet" type="text/css" href="_static/fslit.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.36.0/codemirror.min.js"></script>
+    <script src="_static/fstar.cm.js"></script>
+    <script src="_static/fslit.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Model ISA" href="ISA.html" />
+    <link rel="prev" title="Low-level CPU model" href="Cpu.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta http-equiv="content-style-type" content="text/css">
-        <meta http-equiv="content-script-type" content="text/javascript">
-        <meta name=generator content="Sphinx">
-        <meta name=viewport content="width=device-width,initial-scale=1.0">
-        <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  </head><body>
+  
 
-        <title>Load-store model &mdash; BliME formal model  documentation</title>
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
 
-        
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/main.css" type="text/css" />
-    <link rel="stylesheet" href="_static/genericons.css" type="text/css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.36.0/codemirror.min.css" type="text/css" /><link rel="stylesheet" href="_static/cm.tango.css" type="text/css" /><link rel="stylesheet" href="_static/fslit.css" type="text/css" />
-    <link rel="stylesheet" href="_static/mobile.css" type="text/css" media="only screen and (max-device-width: 568px)">
-        
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.36.0/codemirror.min.js"></script>
-    <script type="text/javascript" src="_static/fstar.cm.js"></script>
-    <script type="text/javascript" src="_static/fslit.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="_static/backtop.js"></script>
-
-    </head>
-    <body>
-    <div class="content">
-        <header id="top-header">
-            <div class="left">
-    <ul class="breadcrumb">
-        <li>
-            <a href="index.html">BliME formal model  documentation</a>
-             &raquo;
-        </li> 
-    </ul>
-            </div>
-            <div class="right">
-                
-    <ul class="relative">
-      <li >
-            <a href="genindex.html" title="General Index"
-               class="icon-index"
-                accesskey="I"></a>
-        </li>
-      <li >
-            <a href="ISA.html" title="Model ISA"
-               class="icon-next"
-                accesskey="N"></a>
-        </li>
-      <li >
-            <a href="Cpu.html" title="Low-level CPU model"
-               class="icon-previous"
-                accesskey="P"></a>
-        </li>
-    </ul>
-            </div>
-            <div class="clearer"></div>
-        </header>
-        
-
-        <div class="documentwrapper">
-        <div class="sidebarwrapper">
-            <div class="sidebar">
-                    <h3><a href="index.html">Top</a></h3><nav class="localtoc">
-      <ul>
-<li><a class="reference internal" href="#">Load-store model</a><ul>
-<li><a class="reference internal" href="#instruction-operands">Instruction operands</a><ul>
-<li><a class="reference internal" href="#reads">Reads</a></li>
-<li><a class="reference internal" href="#writes">Writes</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#memory-operations">Memory operations</a></li>
-<li><a class="reference internal" href="#instructions">Instructions</a><ul>
-<li><a class="reference internal" href="#outputs">Outputs</a></li>
-<li><a class="reference internal" href="#inputs">Inputs</a></li>
-<li><a class="reference internal" href="#semantics">Semantics</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#execution-model">Execution model</a><ul>
-<li><a class="reference internal" href="#redacting-equivalent-safety">Redacting-equivalent safety</a></li>
-<li><a class="reference internal" href="#main-safety-theorem">Main safety theorem</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-</nav><div class="relative">
-      <h4>Previous topic</h4>
-      <p class="topless"><a href="Cpu.html"
-                            title="previous chapter">Low-level CPU model</a></p>
-      <h4>Next topic</h4>
-      <p class="topless"><a href="ISA.html"
-                            title="next chapter">Model ISA</a></p>
-</div>
-  <h4>This Page</h4>
-  <a href="_sources/InstructionDecoder.fst.txt"
-           rel="nofollow">Show Source</a>
-<div id="searchbox" style="display: none">
-  <h5>Quick search</h5>
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" placeholder=' quick search' />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-            </div>
-        </div>
-            <div class="document">
-                <div class="body">
-                    
-    <section id="load-store-model">
-<h1>Load-store model<a class="headerlink" href="#load-store-model" title="Permalink to this headline">¶</a></h1>
+          <div class="body" role="main">
+            
+  <section id="load-store-model">
+<h1>Load-store model<a class="headerlink" href="#load-store-model" title="Permalink to this heading">¶</a></h1>
 <p>This CPU model includes more detail, with each instruction having register
 operands, and producing a set of memory operations to be carried out by a
 load-store unit.</p>
@@ -142,7 +52,7 @@ open Value
 
 </code></pre>
 <section id="instruction-operands">
-<h2>Instruction operands<a class="headerlink" href="#instruction-operands" title="Permalink to this headline">¶</a></h2>
+<h2>Instruction operands<a class="headerlink" href="#instruction-operands" title="Permalink to this heading">¶</a></h2>
 <p>We now begin in earnest by describing how instruction operands are handled.</p>
 <p>An instruction operand represents the target of a read or write
 to the register file (or from an immediate).</p>
@@ -151,33 +61,37 @@ to the register file (or from an immediate).</p>
   | Register: n:nat -&gt; operand
   | Immediate: n:Cpu.word -&gt; operand</code></pre>
 <section id="reads">
-<h3>Reads<a class="headerlink" href="#reads" title="Permalink to this headline">¶</a></h3>
+<h3>Reads<a class="headerlink" href="#reads" title="Permalink to this heading">¶</a></h3>
 <p>The first object of analysis is the function <code class="docutils literal notranslate"><span class="pre">get_operands</span></code>, that will
 take a list of input operands and extract them from the system state.</p>
 <pre class="code fstar literal-block"><code>let rec get_operands (#n #r: memory_size) (operands:list operand) (state:systemState #n #r):
-    rv:(list (maybeBlinded #word)){FStar.List.length rv = FStar.List.length operands} =
+    rv:(list blindedWord){FStar.List.length rv = FStar.List.length operands} =
   match operands with
     | Nil -&gt; Nil
     | hd :: tl -&gt; (match hd with
-                  | PC -&gt; Clear state.pc
+                  | PC -&gt; make_clear state.pc
                   | Register n -&gt; if n &lt; FStar.List.length state.registers then
                                     (FStar.List.Tot.index state.registers n)
-                                 else Clear 0uL
-                  | Immediate n -&gt; Clear n
-                ) :: get_operands tl state</code></pre>
+                                 else make_clear 0uL
+                  | Immediate n -&gt; make_clear n
+                ) :: get_operands tl state
+
+</code></pre>
 <p>We start by proving that operand extraction preserves redaction.</p>
 <p>We do this by induction.  It is convenient to first prove that extraction
 of just one operand preserves redaction:</p>
 <pre class="code fstar literal-block"><code>let get_operands_with_one_operand_on_redacted_input_has_redacted_output (#n #r: memory_size)
     (op: operand) (state:systemState #n #r):
-  Lemma (ensures get_operands [op] (redact_system state) = redact_list (get_operands [op] state) 0uL) =
+  Lemma (ensures (let zero: (inner #blindedWord) = 0uL in
+                  get_operands [op] (redact_system state) = redact_list (get_operands [op] state) zero)) =
   let head = FStar.List.Tot.hd (get_operands [op] state) in
   let head_of_redacted = FStar.List.Tot.hd (get_operands [op] (redact_system state)) in
   match op with
     | PC -&gt; ()
     | Register n -&gt; (
-        lists_are_equivalent_to_their_redaction _ state.registers 0uL;
-        equal_lists_are_equivalent _ (redact_system state).registers  (redact_list state.registers 0uL);
+        let zero: (inner #blindedWord) = 0uL in
+        lists_are_equivalent_to_their_redaction _ state.registers zero;
+        equal_lists_are_equivalent _ (redact_system state).registers  (redact_list state.registers zero);
         equivalent_lists_have_equal_lengths state.registers (redact_system state).registers;
         if n &gt;= FStar.List.length state.registers then () else ()
       )
@@ -187,8 +101,9 @@ redacted as above, and then recurse by repeating this for the tail of the
 operand list.</p>
 <pre class="code fstar literal-block"><code>let rec get_operands_on_redacted_input_has_redacted_output (#n #r: memory_size)
     (operands:list operand) (state:systemState #n #r):
-  Lemma (ensures get_operands operands (redact_system state)
-                 = redact_list (get_operands operands state) 0uL)
+  Lemma (ensures (let zero: (inner #blindedWord) = 0uL in
+                  get_operands operands (redact_system state)
+                  = redact_list (get_operands operands state) zero))
         [SMTPat (get_operands operands (redact_system state))] =
   (
     match operands with
@@ -200,12 +115,13 @@ operand list.</p>
           get_operands_with_one_operand_on_redacted_input_has_redacted_output hd state;
           assert(redact head 0uL = head_of_redacted);
 
-          let redacted_head = redact head 0uL in
+          let zero: (inner #blindedWord) = 0uL in
+          let redacted_head = redact head zero in
 
           get_operands_on_redacted_input_has_redacted_output tl state;
-          assert(get_operands tl (redact_system state) = redact_list (get_operands tl state) 0uL);
+          assert(get_operands tl (redact_system state) = redact_list (get_operands tl state) zero);
           assert((head_of_redacted :: (get_operands tl (redact_system state)))
-            = (redacted_head :: (redact_list (get_operands tl state) 0uL)))
+            = (redacted_head :: (redact_list (get_operands tl state) zero)))
         )
 )</code></pre>
 <p>We then prove that extracting operands from the state also preserves
@@ -218,12 +134,12 @@ equivalence, though in this case we jump to the inductive proof directly.</p>
   = match operands with
       | Nil -&gt; ()
       | hd :: tl -&gt; (
-          let result_hd1, result_hd2 =
+          let result_hd1, result_hd2: FStar.Pervasives.Native.tuple2 blindedWord blindedWord =
             match hd with
              | PC -&gt; (
                   let head1 = FStar.List.Tot.hd (get_operands operands state1) in
                   let head2 = FStar.List.Tot.hd (get_operands operands state2) in
-                  equal_values_are_equivalent Cpu.word head1 head2;
+                  //equal_values_are_equivalent Cpu.word head1 head2;
                   head1, head2
                )
              | Register n -&gt; (
@@ -234,17 +150,18 @@ equivalence, though in this case we jump to the inductive proof directly.</p>
                   )
                   else ();
 
-                  FStar.List.Tot.hd (get_operands operands state1),
-                    FStar.List.Tot.hd (get_operands operands state2)
+                  let head1: blindedWord = FStar.List.Tot.hd (get_operands operands state1) in
+                  let head2: blindedWord = FStar.List.Tot.hd (get_operands operands state2) in
+                  head1, head2
                )
-             | Immediate n -&gt; (Clear n, Clear n) in
+             | Immediate n -&gt; (make_clear n, make_clear n) in
                  assert(equiv result_hd1 result_hd2);
                  get_operands_on_equivalent_inputs_has_equivalent_output tl state1 state2
       )
 </code></pre>
 </section>
 <section id="writes">
-<h3>Writes<a class="headerlink" href="#writes" title="Permalink to this headline">¶</a></h3>
+<h3>Writes<a class="headerlink" href="#writes" title="Permalink to this heading">¶</a></h3>
 <p>Next we look at how to write operands.  First we will define some utility functions.</p>
 <p>The first operation that we will do is to take a list and replace a single element
 of a list with the corresponding element of another list (if it exists).</p>
@@ -252,14 +169,14 @@ of a list with the corresponding element of another list (if it exists).</p>
 <blockquote>
 <div></div></blockquote>
 <p>Then we do the same thing with a whole list of elements to replace.</p>
-<pre class="code fstar literal-block"><code>let rec mux_list (a:list (maybeBlinded #word)) (b:(list (maybeBlinded #word))) (which_b:list nat):
-    Tot (list (maybeBlinded #word)) (decreases which_b) =
+<pre class="code fstar literal-block"><code>let rec mux_list (a:list blindedWord) (b:(list blindedWord)) (which_b:list nat):
+    Tot (list blindedWord) (decreases which_b) =
   match which_b with
     | Nil -&gt; a
     | index_to_change :: tl -&gt; mux_list (mux_list_single a b index_to_change) b tl</code></pre>
 <p>Then the same again replacing the list element with a specific value.</p>
-<pre class="code fstar literal-block"><code>let rec replace_list_value (orig:list(maybeBlinded #word)) (n:nat) (v:maybeBlinded #word):
-        r:(list(maybeBlinded #word)){FStar.List.length r = FStar.List.length orig}
+<pre class="code fstar literal-block"><code>let rec replace_list_value (orig:list blindedWord) (n:nat) (v: blindedWord):
+        r:(list blindedWord){FStar.List.length r = FStar.List.length orig}
     = match orig with
       | Nil -&gt; Nil
       | hd :: tl -&gt;  if (n &gt; 0)
@@ -269,7 +186,7 @@ of a list with the corresponding element of another list (if it exists).</p>
                      v :: tl</code></pre>
 <p>We then show that replacing a list value preserves equivalence.</p>
 <pre class="code fstar literal-block"><code>let rec replacing_in_equivalent_lists_with_equivalent_value_yields_equivalent_lists
-    (orig1 orig2:list(maybeBlinded #word)) (n:nat) (v1 v2:maybeBlinded #word):
+    (orig1 orig2:list blindedWord) (n:nat) (v1 v2: blindedWord):
   Lemma (requires (equiv_list orig1 orig2) /\ (equiv v1 v2))
         (ensures (equiv_list (replace_list_value orig1 n v1) (replace_list_value orig2 n v2))) =
   match n, orig1, orig2 with
@@ -281,7 +198,7 @@ of a list with the corresponding element of another list (if it exists).</p>
 <p>We then show that replacing a list value and reading it back yields the
 value that we wrote.</p>
 <pre class="code fstar literal-block"><code>let rec replacing_then_reading_yields_original_value
-    (orig: list (maybeBlinded #word)) (v:maybeBlinded #word) (n:nat):
+    (orig: list blindedWord) (v:blindedWord) (n:nat):
   Lemma (requires n &lt; FStar.List.length orig)
         (ensures FStar.List.Tot.index (replace_list_value orig n v) n = v)
     = match n, orig with
@@ -291,15 +208,17 @@ value that we wrote.</p>
 <p>Now that we have these utility functions, we can use them to write output
 to the machine state.  First a single operand:</p>
 <pre class="code fstar literal-block"><code>let set_one_operand (#n #r: memory_size)
-      (operand:operand) (value:maybeBlinded #word) (state:systemState #n #r):
+      (operand:operand) (value:blindedWord) (state:systemState #n #r):
       systemState #n #r =
     match operand with
-      | PC -&gt; (match value with
-               | Clear v -&gt; if FStar.UInt64.v v &lt; FStar.List.length state.memory then
-                              { state with pc = v }
-                           else
-                              { state with pc = 0uL }
-               | Blinded b -&gt; {state with pc = 0uL})
+      | PC -&gt; (if is_blinded value then
+                 {state with pc = 0uL}
+               else
+                 let v = unwrap value in
+                   if FStar.UInt64.v v &lt; FStar.List.length state.memory then
+                      { state with pc = v }
+                   else
+                     { state with pc = 0uL })
       | Register n -&gt; if n &lt; FStar.List.length state.registers then
                         { state with registers =
                           replace_list_value state.registers n value
@@ -309,11 +228,11 @@ to the machine state.  First a single operand:</p>
       | Immediate n -&gt; state
 
 let setting_and_getting_one_non_faulting_operand_value_yields_original_value (#n #r: memory_size)
-    (operand:operand) (value:maybeBlinded #word) (state:systemState #n #r):
+    (operand:operand) (value: blindedWord) (state:systemState #n #r):
   Lemma (requires ~(match operand with
-                     | PC -&gt; (match value with
-                              | Blinded v -&gt; True
-                              | Clear v -&gt; FStar.UInt64.v v &gt;= FStar.List.length state.memory)
+                     | PC -&gt; (if is_blinded value then True
+                              else let v = unwrap value in
+                                   FStar.UInt64.v v &gt;= FStar.List.length state.memory)
                      | Register n -&gt; n &gt;= FStar.List.length state.registers
                      | Immediate n -&gt; True))
         (ensures get_operands [operand] (set_one_operand operand value state) = [value]) =
@@ -325,21 +244,21 @@ let setting_and_getting_one_non_faulting_operand_value_yields_original_value (#n
 <pre class="code fstar literal-block"><code>let setting_single_equivalent_operand_values_on_equivalent_systems_yields_equivalent_systems
     (#n #r: memory_size)
     (operand       :operand)
-    (value1 value2 :(maybeBlinded #word))
+    (value1 value2 :blindedWord)
     (state1 state2 :systemState #n #r):
     Lemma (requires (equiv_system state1 state2) /\ (equiv value1 value2))
           (ensures  (equiv_system (set_one_operand operand value1 state1)
                                   (set_one_operand operand value2 state2))) =
     match operand with
-      | PC -&gt; (match value1, value2 with
-               | Clear v1, Clear v2 -&gt; (
+      | PC -&gt; (if not (is_blinded value1) &amp;&amp; not (is_blinded value2) then (
+                 let v1,v2 = unwrap value1, unwrap value2 in
                        assert(v1 = v2);
                        equivalent_lists_have_equal_lengths state1.memory state2.memory;
                        let post1 = (set_one_operand operand value1 state1) in
                        let post2 = (set_one_operand operand value2 state2) in
                        assert(post1.pc = post2.pc)
                        )
-               | _, _ -&gt; ())
+               else ())
       | Register n -&gt; (
           equivalent_lists_have_equal_lengths state1.registers state2.registers;
           if n &gt;= FStar.List.length state1.registers then ()
@@ -351,7 +270,7 @@ let setting_and_getting_one_non_faulting_operand_value_yields_original_value (#n
 <p>Then multiple operands:</p>
 <pre class="code fstar literal-block"><code>let rec set_operands (#n #r: memory_size)
     (operands:list operand)
-    (values:(list (maybeBlinded #word)){FStar.List.length operands = FStar.List.length values})
+    (values:(list  blindedWord){FStar.List.length operands = FStar.List.length values})
     (state:systemState #n #r):
         systemState #n #r =
     match operands, values with
@@ -362,8 +281,8 @@ let setting_and_getting_one_non_faulting_operand_value_yields_original_value (#n
 let rec setting_equivalent_operand_values_on_equivalent_systems_yields_equivalent_systems
     (#n #r: memory_size)
     (operands       :list operand)
-    (values1:(list (maybeBlinded #word)){FStar.List.length operands = FStar.List.length values1})
-    (values2:(list (maybeBlinded #word)){FStar.List.length operands = FStar.List.length values2})
+    (values1:(list  blindedWord){FStar.List.length operands = FStar.List.length values1})
+    (values2:(list  blindedWord){FStar.List.length operands = FStar.List.length values2})
     (state1: systemState #n #r)  (state2 :systemState #n #r):
     Lemma (requires (equiv_system state1 state2) /\ (equiv_list values1 values2))
           (ensures  (equiv_system (set_operands operands values1 state1)
@@ -390,7 +309,7 @@ let rec setting_equivalent_operand_values_on_equivalent_systems_yields_equivalen
 </section>
 </section>
 <section id="memory-operations">
-<h2>Memory operations<a class="headerlink" href="#memory-operations" title="Permalink to this headline">¶</a></h2>
+<h2>Memory operations<a class="headerlink" href="#memory-operations" title="Permalink to this heading">¶</a></h2>
 <p>Now we look at memory operations.</p>
 <p>These are represented differently from instruction operands, because in
 a real processor they would handled by the load-store unit, which can’t
@@ -556,8 +475,10 @@ yields equivalent systems.</p>
                            assert(a2 &lt; FStar.List.length state2.memory);
                            assert(r2 &lt; FStar.List.length state2.registers);
 
+                           let mem1 = state1.memory in
+                           let mem2 = state2.memory in
                            equivalent_lists_have_equivalent_values
-                             word state1.memory state2.memory a1;
+                             blindedWord mem1 mem2 a1;
 
                            let write1 = (FStar.List.Tot.index state1.memory a1) in
                            let write2 = (FStar.List.Tot.index state2.memory a2) in
@@ -592,8 +513,10 @@ yields equivalent systems.</p>
                            assert(a2 &lt; FStar.List.length state2.memory);
                            assert(r2 &lt; FStar.List.length state2.registers);
 
+                           let reg1 = state1.registers in
+                           let reg2 = state2.registers in
                            equivalent_lists_have_equivalent_values
-                             word state1.registers state2.registers r1;
+                             blindedWord reg1 reg2 r1;
 
                            let write1 = (FStar.List.Tot.index state1.registers r1) in
                            let write2 = (FStar.List.Tot.index state2.registers r2) in
@@ -640,7 +563,7 @@ let rec completing_equivalent_memory_transactions_on_equivalent_systems_yields_e
      | [], [] -&gt; ()</code></pre>
 </section>
 <section id="instructions">
-<h2>Instructions<a class="headerlink" href="#instructions" title="Permalink to this headline">¶</a></h2>
+<h2>Instructions<a class="headerlink" href="#instructions" title="Permalink to this heading">¶</a></h2>
 <p>The next step is to define the concept of an instruction decoding.  We
 don’t want to analyze a specific ISA here, so instead we suppose that there
 is an instruction decoder in the processor that will identify the instruction
@@ -650,21 +573,24 @@ type decoder = (inst:word) -&gt; decodedInstruction
 type decoder_output (d:decoder) = (di:decodedInstruction{exists(inst:word). di = d inst})
 </code></pre>
 <section id="outputs">
-<h3>Outputs<a class="headerlink" href="#outputs" title="Permalink to this headline">¶</a></h3>
+<h3>Outputs<a class="headerlink" href="#outputs" title="Permalink to this heading">¶</a></h3>
 <p>Once we know what the instruction operands are, we can define a
 representation of the results of the instruction.  This contains a value
 corresponding to each output operand (as identified by the instruction
 decoder), as well as a list of memory operations.</p>
 <pre class="code fstar literal-block"><code>type instruction_result (di:decodedInstruction) = {
-  register_writes: (vals:(list (maybeBlinded #word)){
+  register_writes: (vals:(list  blindedWord){
                      FStar.List.length vals = FStar.List.length di.output_operands});
-  memory_ops: (list memory_operation)
+  memory_ops: (list memory_operation);
+  fault: bool
 }</code></pre>
 <p>We can then define an equivalence relation on instruction results to see
 whether they leak information:</p>
-<pre class="code fstar literal-block"><code>let equiv_result (#di:decodedInstruction) (lhs rhs:(instruction_result di)) =
-    (equiv_list lhs.register_writes rhs.register_writes)
-  /\ (equiv_memory_operations lhs.memory_ops rhs.memory_ops)</code></pre>
+<pre class="code fstar literal-block"><code>let equiv_result (#di:decodedInstruction) (lhs rhs:(instruction_result di)) = (
+      (equiv_list lhs.register_writes rhs.register_writes)
+    /\ (equiv_memory_operations lhs.memory_ops rhs.memory_ops)
+    /\ lhs.fault = false /\ rhs.fault = false)
+  \/ (lhs.fault = true /\ rhs.fault = true)</code></pre>
 <dl>
 <dt>Then we define the usual bevy of properties:</dt><dd><ul class="simple">
 <li><p><strong>Equality implies equivalence</strong>:</p></li>
@@ -672,7 +598,7 @@ whether they leak information:</p>
 <pre class="code fstar literal-block"><code>let equal_results_are_equivalent (#di:decodedInstruction) (lhs rhs:(instruction_result di)):
   Lemma (requires lhs = rhs)
         (ensures  equiv_result lhs rhs)
-  = equal_lists_are_equivalent word lhs.register_writes rhs.register_writes;
+  = equal_lists_are_equivalent blindedWord lhs.register_writes rhs.register_writes;
     equal_memory_operation_lists_are_equivalent lhs.memory_ops rhs.memory_ops</code></pre>
 <ul class="simple">
 <li><p><strong>Symmetry</strong></p></li>
@@ -680,39 +606,47 @@ whether they leak information:</p>
 <pre class="code fstar literal-block"><code>let result_equivalence_is_symmetric (#di:decodedInstruction) (lhs rhs:(instruction_result di)):
   Lemma (requires equiv_result lhs rhs)
         (ensures equiv_result rhs lhs) =
-  list_equivalence_is_symmetric word lhs.register_writes rhs.register_writes;
-  memory_operation_list_equivalence_is_symmetric lhs.memory_ops rhs.memory_ops</code></pre>
+  assert(lhs.fault = rhs.fault);
+  if lhs.fault = false then (
+    list_equivalence_is_symmetric blindedWord lhs.register_writes rhs.register_writes;
+    memory_operation_list_equivalence_is_symmetric lhs.memory_ops rhs.memory_ops)
+  else
+    ()</code></pre>
 <ul class="simple">
 <li><p><strong>Transitivity</strong></p></li>
 </ul>
 <pre class="code fstar literal-block"><code>let result_equivalence_is_transitive (#di:decodedInstruction) (lhs mid rhs:(instruction_result di)):
   Lemma (requires (equiv_result lhs mid) /\ (equiv_result mid rhs))
         (ensures  (equiv_result lhs rhs)) =
-  list_equivalence_is_transitive word lhs.register_writes mid.register_writes rhs.register_writes;
-  memory_operation_list_equivalence_is_transitive lhs.memory_ops mid.memory_ops rhs.memory_ops</code></pre>
+  assert(lhs.fault = mid.fault &amp;&amp; mid.fault = rhs.fault);
+  if lhs.fault = false then (
+    list_equivalence_is_transitive blindedWord lhs.register_writes mid.register_writes rhs.register_writes;
+    memory_operation_list_equivalence_is_transitive lhs.memory_ops mid.memory_ops rhs.memory_ops)
+  else ()</code></pre>
 </dd>
 </dl>
 </section>
 <section id="inputs">
-<h3>Inputs<a class="headerlink" href="#inputs" title="Permalink to this headline">¶</a></h3>
+<h3>Inputs<a class="headerlink" href="#inputs" title="Permalink to this heading">¶</a></h3>
 <p>We also define a type that indicates which lists of input operands are
 compatible with a decoded instruction: some lists are just not possible,
 either because they have the wrong number of operands for that instruction,
 or because they conflict with each other (e.g. r1, r2, r1 → 1, 2, 3).</p>
 <pre class="code fstar literal-block"><code>type instruction_input (#n #r: memory_size) (di:decodedInstruction) =
-     pre:(list (maybeBlinded #word)){
+     pre:(list  blindedWord){
            (exists(s: systemState #n #r). pre = get_operands di.input_operands s)
                  /\ FStar.List.length pre = FStar.List.length di.input_operands}</code></pre>
 <p>We then show that this property is preserved by redaction.</p>
 <pre class="code fstar literal-block"><code>let redacted_instruction_inputs_are_instruction_inputs  (#n #r: memory_size)
     (di:decodedInstruction) (pre:instruction_input #n #r di): instruction_input #n #r di
-  = assert(exists (s:systemState). (pre = get_operands #n #r di.input_operands s /\
+  = let zero: (inner #blindedWord) = 0uL in
+    assert(exists (s:systemState). (pre = get_operands #n #r di.input_operands s /\
                                  (get_operands #n #r di.input_operands (redact_system s)
-                   = redact_list (get_operands di.input_operands s) 0uL  )  ) );
-    redact_list pre 0uL</code></pre>
+                   =  redact_list (get_operands di.input_operands s) zero  )  ) );
+    redact_list pre zero</code></pre>
 </section>
 <section id="semantics">
-<h3>Semantics<a class="headerlink" href="#semantics" title="Permalink to this headline">¶</a></h3>
+<h3>Semantics<a class="headerlink" href="#semantics" title="Permalink to this heading">¶</a></h3>
 <p>Next we start looking at what the instructions actually do.  Earlier we
 defined the idea of an <a class="reference internal" href="Cpu.html#execution-unit"><span class="std std-ref">execution unit</span></a> that maps
 an old state to a new state according to an instruction.  Now we want do
@@ -727,7 +661,8 @@ outputs:</p>
       (s:instruction_semantics #n #r d)
       (inst:word)
       (input:instruction_input #n #r (d inst)) =
-    redaction_preserves_length word input 0uL;
+    let zero : (inner #blindedWord) = 0uL in
+    redaction_preserves_length blindedWord input zero;
     let redacted_input = redacted_instruction_inputs_are_instruction_inputs (d inst) input in
     (equiv_result (s (d inst) input) (s (d inst) redacted_input))
 
@@ -746,12 +681,13 @@ lead to equivalent results when applied to a redacted input.</p>
   Lemma (requires (is_redacting_equivalent_instruction_semantics_everywhere d s)
                   /\ (equiv_list input1 input2))
         (ensures  equiv_result (s (d inst) input1) (s (d inst) input2)) =
+  let zero : (inner #blindedWord) = 0uL in
   let result1 = (s (d inst) input1) in
   let result2 = (s (d inst) input2) in
-  let redacted_result1 = (s (d inst) (redact_list input1 0uL)) in
-  let redacted_result2 = (s (d inst) (redact_list input2 0uL)) in
+  let redacted_result1 = (s (d inst) (redact_list input1 zero)) in
+  let redacted_result2 = (s (d inst) (redact_list input2 zero)) in
 
-  equivalent_lists_have_equal_redactions word input1 input2 0uL;
+  equivalent_lists_have_equal_redactions blindedWord input1 input2 zero;
   assert(redacted_result1 = redacted_result2);
   equal_results_are_equivalent redacted_result1 redacted_result2;
 
@@ -766,7 +702,7 @@ lead to equivalent results when applied to a redacted input.</p>
 </section>
 </section>
 <section id="execution-model">
-<span id="loadstore-execution-model"></span><h2>Execution model<a class="headerlink" href="#execution-model" title="Permalink to this headline">¶</a></h2>
+<span id="loadstore-execution-model"></span><h2>Execution model<a class="headerlink" href="#execution-model" title="Permalink to this heading">¶</a></h2>
 <p>We now define the <a class="reference internal" href="Cpu.html#execution-unit"><span class="std std-ref">execution unit</span></a> in terms of an instruction
 semantics function.  This execution unit</p>
 <ol class="arabic simple">
@@ -782,6 +718,7 @@ semantics function.  This execution unit</p>
     let decoded = d inst in
     let input_operand_values = (get_operands decoded.input_operands pre) in
     let instruction_output = (s decoded input_operand_values) in
+    if instruction_output.fault then { pre with pc = 0uL } else
     let output_operand_values = instruction_output.register_writes in
     let pre_with_incremented_pc =
           { pre with pc = (
@@ -801,7 +738,7 @@ into the proof state.</p>
   (inst:word) (pre:systemState #n #r) = False
 </code></pre>
 <section id="redacting-equivalent-safety">
-<h3>Redacting-equivalent safety<a class="headerlink" href="#redacting-equivalent-safety" title="Permalink to this headline">¶</a></h3>
+<h3>Redacting-equivalent safety<a class="headerlink" href="#redacting-equivalent-safety" title="Permalink to this heading">¶</a></h3>
 <p>Now we are at the point that we can start to prove security properties of this execution unit, when applied to instruction semantics that are also redacting-equivalent.</p>
 <p>First, that it is redacting equivalent for specific instructions and system states.</p>
 <pre class="code fstar literal-block"><code>let loadstore_execution_unit_with_re_instruction_semantics_is_redacting_equivalent_somewhere
@@ -840,56 +777,67 @@ into the proof state.</p>
 
       assert(equiv_result instruction_output redacted_instruction_output);
 
-      lists_are_equivalent_to_their_redaction word input_operand_values 0uL;
+      assert(instruction_output.fault = redacted_instruction_output.fault);
+      if instruction_output.fault then
+        (
+          let post_with_fault = { pre with pc = 0uL } in
+          let post_redacted_with_fault = { (redact_system pre) with pc = 0uL } in
+          assert(equiv_system #n #r #n #r post_with_fault post_redacted_with_fault)
+        )
+      else (
+        let zero : (inner #blindedWord) = 0uL in
+        lists_are_equivalent_to_their_redaction blindedWord input_operand_values zero;
 
-      assert(equiv_list input_operand_values (get_operands decoded.input_operands (redact_system pre)));
+        assert(equiv_list input_operand_values (get_operands decoded.input_operands (redact_system pre)));
 
-      list_equivalence_is_transitive word redacted_input_operand_values
-        input_operand_values
-        (get_operands decoded.input_operands (redact_system pre));
+        list_equivalence_is_symmetric blindedWord input_operand_values redacted_input_operand_values;
+        assert(equiv_list redacted_input_operand_values input_operand_values);
+        list_equivalence_is_transitive blindedWord redacted_input_operand_values
+          input_operand_values
+          (get_operands decoded.input_operands (redact_system pre));
 
-      assert(equiv_list redacted_input_operand_values
-                        (get_operands decoded.input_operands (redact_system pre)));
+        assert(equiv_list redacted_input_operand_values
+                          (get_operands decoded.input_operands (redact_system pre)));
 
-      assert(equiv_list instruction_output.register_writes redacted_instruction_output.register_writes);
+        assert(equiv_list instruction_output.register_writes redacted_instruction_output.register_writes);
 
-      let post1 = set_operands decoded.output_operands
-                               instruction_output.register_writes
-                               pre_with_incremented_pc in
-      let post_redacted1 = set_operands decoded.output_operands
-                                        redacted_instruction_output.register_writes
-                                        (redact_system pre_with_incremented_pc) in
+        let post1 = set_operands decoded.output_operands
+                                 instruction_output.register_writes
+                                 pre_with_incremented_pc in
+        let post_redacted1 = set_operands decoded.output_operands
+                                          redacted_instruction_output.register_writes
+                                          (redact_system pre_with_incremented_pc) in
 
-      systems_are_equivalent_to_their_redaction pre_with_incremented_pc;
-      assert(equiv_system pre_with_incremented_pc (redact_system pre_with_incremented_pc));
+        systems_are_equivalent_to_their_redaction pre_with_incremented_pc;
+        assert(equiv_system pre_with_incremented_pc (redact_system pre_with_incremented_pc));
 
-      setting_equivalent_operand_values_on_equivalent_systems_yields_equivalent_systems
-        decoded.output_operands instruction_output.register_writes
-        redacted_instruction_output.register_writes
-        pre_with_incremented_pc
-        (redact_system pre_with_incremented_pc);
+        setting_equivalent_operand_values_on_equivalent_systems_yields_equivalent_systems
+          decoded.output_operands instruction_output.register_writes
+          redacted_instruction_output.register_writes
+          pre_with_incremented_pc
+          (redact_system pre_with_incremented_pc);
 
-      assert(equiv_system post1 post_redacted1);
+        assert(equiv_system post1 post_redacted1);
 
-      let post2: systemState #n #r = complete_memory_transactions instruction_output.memory_ops
-                                                                  post1
-                                                                  cp in
-      let post_redacted2: systemState #n #r =
-        complete_memory_transactions redacted_instruction_output.memory_ops post_redacted1 cp in
+        let post2: systemState #n #r = complete_memory_transactions instruction_output.memory_ops
+                                                                    post1
+                                                                    cp in
+        let post_redacted2: systemState #n #r =
+          complete_memory_transactions redacted_instruction_output.memory_ops post_redacted1 cp in
 
-      assert(equiv_memory_operations instruction_output.memory_ops
-                                     redacted_instruction_output.memory_ops);
-      equivalent_memory_operation_lists_have_equal_length
-        instruction_output.memory_ops redacted_instruction_output.memory_ops;
+        assert(equiv_memory_operations instruction_output.memory_ops
+                                       redacted_instruction_output.memory_ops);
+        equivalent_memory_operation_lists_have_equal_length
+          instruction_output.memory_ops redacted_instruction_output.memory_ops;
 
-      completing_equivalent_memory_transactions_on_equivalent_systems_yields_equivalent_systems
-        instruction_output.memory_ops
-        redacted_instruction_output.memory_ops
-        post1
-        post_redacted1
-        cp;
-
-      assert(equiv_system post2 post_redacted2)</code></pre>
+        completing_equivalent_memory_transactions_on_equivalent_systems_yields_equivalent_systems
+          instruction_output.memory_ops
+          redacted_instruction_output.memory_ops
+          post1
+          post_redacted1
+          cp;
+        assert(equiv_system post2 post_redacted2)
+    )</code></pre>
 <p>Next, that it is redacting equivalent for all instructions and system states.</p>
 <pre class="code fstar literal-block"><code>let loadstore_execution_unit_with_re_instruction_semantics_is_redacting_equivalent
     (#n #r: memory_size)
@@ -903,7 +851,7 @@ into the proof state.</p>
     = ()</code></pre>
 </section>
 <section id="main-safety-theorem">
-<h3>Main safety theorem<a class="headerlink" href="#main-safety-theorem" title="Permalink to this headline">¶</a></h3>
+<h3>Main safety theorem<a class="headerlink" href="#main-safety-theorem" title="Permalink to this heading">¶</a></h3>
 <p>Finally, we show that the decoding execution unit is safe.</p>
 <pre class="code fstar literal-block"><code>let each_loadstore_execution_unit_with_redacting_equivalent_instruction_semantics_is_safe
       (#n #r: memory_size)
@@ -917,25 +865,84 @@ into the proof state.</p>
 </section>
 </section>
 
-    <div id="raise-top"></div>
 
-                </div>
-            </div> <!-- document -->
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">blime-model</a></h1>
 
 
-        </div> <!-- documentwrapper -->
-        <footer>
-            <p class="show-copyright">
-                &copy; Copyright 2022.
-            </p>
-            <p class="show-sphinx">
-              Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 2.4.3.
-            </p>
-            
-              <p class="theme-info"><a href="https://pypi.python.org/pypi/hachibee-sphinx-theme">Sphinx-hachibee-theme</a> is hosted on <a href="https://github.com/hachibeeDI/Sphinx-hachibee-theme">Github</a></p>
-            
-        </footer>
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Modules:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Cpu.html">Low-level CPU model</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Load-store model</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#instruction-operands">Instruction operands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#memory-operations">Memory operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#instructions">Instructions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#execution-model">Execution model</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ISA.html">Model ISA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Value.html">Blindable values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Memory.html">Memory state</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Multi.html">Multi-domain BliMe</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="Cpu.html" title="previous chapter">Low-level CPU model</a></li>
+      <li>Next: <a href="ISA.html" title="next chapter">Model ISA</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
     </div>
-    <script type="text/javascript" src="_static/main.js" async></script>
-    </body>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022&ndash;2023 Anonymous Authors.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 6.1.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="_sources/InstructionDecoder.fst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
 </html>
