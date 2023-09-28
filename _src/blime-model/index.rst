@@ -16,10 +16,10 @@ You can also find the slides from a talk on this model `here <https://lachlan.gu
    :maxdepth: 2
    :caption: Modules:
 
-   Cpu
-   InstructionDecoder
-   ISA
+   src/Cpu
+   src/InstructionDecoder
+   src/ISA
 
-   Value
-   Memory
-   Multi
+   src/Value
+   src/Memory
+   src/Multi
