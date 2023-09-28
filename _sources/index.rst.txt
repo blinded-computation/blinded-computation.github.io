@@ -13,7 +13,6 @@ We provide a machine-checked security proof of BliMe extensions, and an RTL impl
 
 .. toctree::
    :maxdepth: 1
-   :caption: Table of Contents
 
    Preprint <https://arxiv.org/abs/2204.09649>
    Source code <https://github.com/ssg-research/blime>
