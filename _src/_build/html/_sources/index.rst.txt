@@ -7,13 +7,15 @@ We present Blinded Memory (BliMe), an architecture to realize efficient and secu
 
 We provide a machine-checked security proof of BliMe extensions, and an RTL implementation BliMe-BOOM based on the BOOM RISC-V core. BliMe-BOOM incurs no reduction in clock frequency relative to unmodified BOOM, nor does it use significantly more power (<0.5%) or FPGA resources (<5.5%). Various implementations of BliMe (on FPGA and the gem5 simulator) incur only moderate performance overhead (8-25%).
 
-**Cite as:**
-
-  H ElAtali, L J Gunn, H Liljestrand, N Asokan, "BliMe: Verifiably Secure Outsourced Computation with Hardware-Enforced Taint Tracking", Network and Distributed Systems Symposium (NDSS), San Diego, CA, USA. 2024. Accepted. ArXiV:2204.09649.
-
 .. toctree::
    :maxdepth: 1
 
    Preprint <https://arxiv.org/abs/2204.09649>
    Source code <https://github.com/ssg-research/blime>
    Formal model <blime-model/index>
+
+**Cite as:**
+
+  H ElAtali, L J Gunn, H Liljestrand, N Asokan, "BliMe: Verifiably Secure Outsourced Computation with Hardware-Enforced Taint Tracking", Network and Distributed Systems Symposium (NDSS), San Diego, CA, USA. 2024. Accepted. ArXiV:2204.09649.
+
+
