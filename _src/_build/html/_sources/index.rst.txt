@@ -16,6 +16,7 @@ We provide a machine-checked security proof of BliMe extensions, and an RTL impl
 
 **Cite as:**
 
-  H ElAtali, L J Gunn, H Liljestrand, N Asokan, "BliMe: Verifiably Secure Outsourced Computation with Hardware-Enforced Taint Tracking", Network and Distributed Systems Symposium (NDSS), San Diego, CA, USA. 2024. Accepted. ArXiV:2204.09649.
+  H ElAtali, L J Gunn, H Liljestrand, N Asokan, "BliMe: Verifiably Secure Outsourced Computation with Hardware-Enforced Taint Tracking", Network and Distributed Systems Symposium (NDSS), San Diego, CA, USA. 2024. ArXiV:2204.09649.
 
 
+**For more information see the** `Secure Systems Group website <https://ssg-research.github.io/>`_.

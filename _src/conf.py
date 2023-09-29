@@ -7,8 +7,8 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'Blinded Memory'
-copyright = '2022&ndash;2023, Aalto University'
-author = 'Hossam ElAtali, Lachlan J Gunn, '
+copyright = '2022&ndash;2023 Secure Systems Group'
+author = 'H ElAtali, L J Gunn, H Liljestrand, N Asokan'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
