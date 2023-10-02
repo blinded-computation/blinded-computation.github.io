@@ -29,6 +29,17 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 html_theme = 'alabaster'
 html_static_path = ['_static']
 
+html_sidebars = {
+    '**': [
+        'about.html',
+        'navigation.html',
+#        'searchbox.html',
+    ]
+}
+
 import os
 import sys
 sys.path.insert(0, os.path.abspath('/home/lachlan/fstar-mode.el/etc'))
+
+github_repo = 'ssg-research/BliMe'
+github_button = True
